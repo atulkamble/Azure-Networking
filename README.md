@@ -1,4 +1,4 @@
-Perfect ✅ — here’s your **final, production-ready version of “Azure VNet, Subnet, CIDR, IP, 2ⁿ Logic & Key Points”** — ideal for **Terraform projects, Azure Administrator (AZ-104) labs, and interview prep**.
+here’s your **final, production-ready version of “Azure VNet, Subnet, CIDR, IP, 2ⁿ Logic & Key Points”** — ideal for **Terraform projects, Azure Administrator (AZ-104) labs, and interview prep**.
 Everything is formatted for GitHub or your Azure README file.
 
 ---
@@ -250,7 +250,102 @@ flowchart TD
 
 ---
 
-Would you like me to add an **expanded hierarchy diagram** (showing `/16 → /20 → /24 → /28` splits side-by-side** like a tree structure for subnet planning**) — ideal for Azure design presentations?
+Perfect ✅ — below is a **professionally expanded Mermaid CIDR hierarchy diagram** showing how an **Azure VNet `/16`** breaks down step-by-step into **/20**, **/24**, and **/28** subnet levels — ideal for **GitHub README**, **Terraform documentation**, or **Azure architecture slides**.
+
+---
+
+## 🗺️ **Azure VNet CIDR Hierarchy – From /16 → /20 → /24 → /28**
+
+```mermaid
+flowchart TD
+
+%% Root VNet
+A[VNet 10.0.0.0/16<br>65,536 IPs<br>Azure Virtual Network]
+
+%% /20 level (large subnets)
+A --> B1[10.0.0.0/20<br>4096 IPs<br>Hub/Shared Services]
+A --> B2[10.0.16.0/20<br>4096 IPs<br>Production Workloads]
+A --> B3[10.0.32.0/20<br>4096 IPs<br>Development Environment]
+A --> B4[10.0.48.0/20<br>4096 IPs<br>Testing / QA]
+
+%% /24 level (smaller subnets within /20)
+B1 --> C1[10.0.0.0/24<br>256 IPs<br>Mgmt / Jumpbox]
+B1 --> C2[10.0.1.0/24<br>DNS / Bastion]
+B1 --> C3[10.0.2.0/24<br>Security Tools]
+B2 --> C4[10.0.16.0/24<br>Prod Web Tier]
+B2 --> C5[10.0.17.0/24<br>Prod App Tier]
+B2 --> C6[10.0.18.0/24<br>Prod DB Tier]
+B3 --> C7[10.0.32.0/24<br>Dev Web Tier]
+B3 --> C8[10.0.33.0/24<br>Dev App Tier]
+B3 --> C9[10.0.34.0/24<br>Dev DB Tier]
+B4 --> C10[10.0.48.0/24<br>QA Web Tier]
+B4 --> C11[10.0.49.0/24<br>QA App Tier]
+B4 --> C12[10.0.50.0/24<br>QA DB Tier]
+
+%% /28 level (micro subnets within a /24)
+C1 --> D1[10.0.0.0/28<br>16 IPs<br>Bastion-1]
+C1 --> D2[10.0.0.16/28<br>16 IPs<br>Bastion-2]
+C1 --> D3[10.0.0.32/28<br>16 IPs<br>Monitoring]
+C4 --> D4[10.0.16.0/28<br>16 IPs<br>Prod Gateway]
+C4 --> D5[10.0.16.16/28<br>16 IPs<br>Prod Firewall]
+
+%% Styling
+style A fill:#0366d6,stroke:#003366,stroke-width:2px,color:#fff,font-weight:bold
+style B1 fill:#0e8a16,stroke:#003300,color:#fff
+style B2 fill:#0e8a16,stroke:#003300,color:#fff
+style B3 fill:#0e8a16,stroke:#003300,color:#fff
+style B4 fill:#0e8a16,stroke:#003300,color:#fff
+style C1 fill:#28a745,stroke:#003300,color:#fff
+style C2 fill:#28a745,stroke:#003300,color:#fff
+style C3 fill:#28a745,stroke:#003300,color:#fff
+style C4 fill:#28a745,stroke:#003300,color:#fff
+style C5 fill:#28a745,stroke:#003300,color:#fff
+style C6 fill:#28a745,stroke:#003300,color:#fff
+style C7 fill:#28a745,stroke:#003300,color:#fff
+style C8 fill:#28a745,stroke:#003300,color:#fff
+style C9 fill:#28a745,stroke:#003300,color:#fff
+style C10 fill:#28a745,stroke:#003300,color:#fff
+style C11 fill:#28a745,stroke:#003300,color:#fff
+style C12 fill:#28a745,stroke:#003300,color:#fff
+style D1 fill:#f39c12,stroke:#663c00,color:#fff
+style D2 fill:#f39c12,stroke:#663c00,color:#fff
+style D3 fill:#f39c12,stroke:#663c00,color:#fff
+style D4 fill:#f39c12,stroke:#663c00,color:#fff
+style D5 fill:#f39c12,stroke:#663c00,color:#fff
+```
+
+---
+
+### 📘 **Hierarchy Explanation**
+
+| Level                       | CIDR  | IPs    | Description                                       | Example Subnets                 |
+| --------------------------- | ----- | ------ | ------------------------------------------------- | ------------------------------- |
+| **Level 1 – VNet**          | `/16` | 65,536 | Total VNet address space                          | `10.0.0.0/16`                   |
+| **Level 2 – /20 blocks**    | `/20` | 4,096  | Logical environment division (Hub, Prod, Dev, QA) | `10.0.0.0/20`, `10.0.16.0/20`   |
+| **Level 3 – /24 subnets**   | `/24` | 256    | Workload tiers (Web, App, DB)                     | `10.0.16.0/24`, `10.0.17.0/24`  |
+| **Level 4 – /28 micronets** | `/28` | 16     | Small, specialized zones                          | `10.0.16.0/28`, `10.0.16.16/28` |
+
+---
+
+### 🧠 **How to Use This Diagram**
+
+* Copy the code block directly into your `README.md` or Azure network design documentation.
+* GitHub and VSCode both render **Mermaid** diagrams natively.
+* You can rename tiers (e.g., **Prod**, **QA**, **Dev**) and CIDRs as per your project.
+* Great for teaching, Terraform repo visualization, or interview explanation.
+
+---
+
+### 💡 **Tips for Presentations**
+
+* Highlight each level separately (`/16`, `/20`, `/24`, `/28`) to show **progressive segmentation**.
+* Color-code per environment:
+
+  * 🔵 **Hub** → Shared Services
+  * 🟢 **Prod** → Critical workloads
+  * 🟣 **Dev/Test** → Non-critical
+  * 🟠 **Micro /28** → Bastion, Gateway, NVA
+
 
 ---
 
