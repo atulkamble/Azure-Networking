@@ -195,6 +195,62 @@ az network vnet create \
   --subnet-name demo-subnet \
   --subnet-prefix 10.0.1.0/24
 ```
+Excellent ✅ — below is a **clean, GitHub-README-ready Mermaid diagram** that visually explains the **CIDR hierarchy from `/16` → `/24` → `/28`** for Azure VNet and Subnet design.
+
+This diagram is compatible with **Markdown (README.md)**, **Azure documentation**, and **GitHub Pages**.
+
+---
+
+## 🗺️ **Azure VNet → Subnet CIDR Hierarchy Diagram**
+
+```mermaid
+flowchart TD
+    A[VNet 10.0.0.0/16<br>65,536 IPs<br>Used for entire Azure VNet]
+    A --> B1[10.0.0.0/24<br>Web Subnet<br>256 IPs]
+    A --> B2[10.0.1.0/24<br>App Subnet<br>256 IPs]
+    A --> B3[10.0.2.0/24<br>DB Subnet<br>256 IPs]
+    A --> B4[10.0.10.0/24<br>Mgmt Subnet<br>256 IPs]
+
+    %% Deeper split of one /24 into smaller /28 subnets
+    B1 --> C1[10.0.0.0/28<br>16 IPs<br>Bastion-1]
+    B1 --> C2[10.0.0.16/28<br>16 IPs<br>Bastion-2]
+    B1 --> C3[10.0.0.32/28<br>16 IPs<br>Bastion-3]
+    B1 --> C4[10.0.0.48/28<br>16 IPs<br>Bastion-4]
+
+    %% Styles
+    style A fill:#0366d6,stroke:#003366,stroke-width:2px,color:#fff,font-weight:bold
+    style B1 fill:#0e8a16,stroke:#003300,stroke-width:1px,color:#fff
+    style B2 fill:#0e8a16,stroke:#003300,stroke-width:1px,color:#fff
+    style B3 fill:#0e8a16,stroke:#003300,stroke-width:1px,color:#fff
+    style B4 fill:#0e8a16,stroke:#003300,stroke-width:1px,color:#fff
+    style C1 fill:#f39c12,stroke:#663c00,color:#fff
+    style C2 fill:#f39c12,stroke:#663c00,color:#fff
+    style C3 fill:#f39c12,stroke:#663c00,color:#fff
+    style C4 fill:#f39c12,stroke:#663c00,color:#fff
+```
+
+---
+
+### 📘 **Diagram Explanation**
+
+| Level             | CIDR  | Description                             | Total IPs | Usable IPs | Example        |
+| ----------------- | ----- | --------------------------------------- | --------- | ---------- | -------------- |
+| **VNet**          | `/16` | Entire address space for environment    | 65,536    | 65,531     | `10.0.0.0/16`  |
+| **Subnet Layer**  | `/24` | Logical workload divisions (App/Web/DB) | 256       | 251        | `10.0.1.0/24`  |
+| **Micro Subnets** | `/28` | Smaller segments (bastion, jumpbox)     | 16        | 11         | `10.0.0.16/28` |
+
+---
+
+### 💡 **Usage Notes**
+
+* Copy the Mermaid code block above into your **README.md** or **Azure design documentation**.
+* GitHub automatically renders it when using the ` ```mermaid ` code block format.
+* Works perfectly in **VSCode Markdown Preview**, **Obsidian**, or **GitHub Wiki**.
+* You can replace CIDRs or labels to match your own project (e.g., “Prod-Web”, “QA-App”, etc.).
+
+---
+
+Would you like me to add an **expanded hierarchy diagram** (showing `/16 → /20 → /24 → /28` splits side-by-side** like a tree structure for subnet planning**) — ideal for Azure design presentations?
 
 ---
 
