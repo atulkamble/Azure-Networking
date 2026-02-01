@@ -1,4 +1,4 @@
-here’s your **final, production-ready version of “Azure VNet, Subnet, CIDR, IP, 2ⁿ Logic & Key Points”** — ideal for **Terraform projects, Azure Administrator (AZ-104) labs, and interview prep**.
+**“Azure VNet, Subnet, CIDR, IP, 2ⁿ Logic & Key Points”** — ideal for **Terraform projects, Azure Administrator (AZ-104) labs, and interview prep**.
 Everything is formatted for GitHub or your Azure README file.
 
 ---
